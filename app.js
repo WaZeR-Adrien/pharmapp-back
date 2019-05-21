@@ -1,11 +1,14 @@
+const Config = require("config")
+const db = Config.database;
+
 const express = require("express");
 const app = express();
 const Sequelize = require('sequelize');
 
 // DB Connection
-const sequelize = new Sequelize('database', 'username', 'password', {
-    host: 'http://adriennas.synology.me',
-    port: 3307,
+const sequelize = new Sequelize(db.dbname, db.user, db.password, {
+    host: db.host,
+    port: db.port,
     dialect: 'mariadb'
 });
 

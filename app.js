@@ -1,19 +1,13 @@
-const config = require("./config");
-const db = config.database;
-
 const express = require("express");
 const app = express();
-const Sequelize = require('sequelize');
+const Tools = require('./utils/Tools');
 
-// DB Connection
-const sequelize = new Sequelize(db.dbname, db.user, db.password, {
-    host: db.host,
-    port: db.port,
-    dialect: 'mariadb'
-});
+const Category = require('./controllers/Category');
 
-app.get('/', function (req, res) {
-    res.send('Hello World!');
+app.get('/categories', function (req, res) {
+    Category.getAll(categories => {
+        res.json(categories);
+    })
 });
 
 app.listen(3000, function () {

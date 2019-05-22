@@ -3,7 +3,7 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('CONTENIR', {
     PRODUIT_ID: {
-      type: DataTypes.CHAR(32),
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       references: {
@@ -11,18 +11,14 @@ module.exports = function(sequelize, DataTypes) {
         key: 'ID'
       }
     },
-    RAPPORT_ID: {
-      type: DataTypes.CHAR(32),
+    COMMANDE_ID: {
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'RAPPORT',
+        model: 'COMMANDE',
         key: 'ID'
       }
-    },
-    ACCEPTATION: {
-      type: DataTypes.INTEGER(1),
-      allowNull: true
     }
   }, {
     tableName: 'CONTENIR'

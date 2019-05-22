@@ -2,29 +2,40 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('VISITER', {
-    RAPPORT_ID: {
-      type: DataTypes.CHAR(32),
+    DMO_ID: {
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'RAPPORT',
-        key: 'ID'
-      }
-    },
-    DMO_ID: {
-      type: DataTypes.CHAR(32),
-      allowNull: false,
-      references: {
-        model: 'DMO',
+        model: 'PERSONNE',
         key: 'ID'
       }
     },
     CONTACT_ID: {
-      type: DataTypes.CHAR(32),
+      type: DataTypes.INTEGER(11),
       allowNull: false,
+      primaryKey: true,
       references: {
-        model: 'CONTACT',
-        key: 'PERSONNE_ID'
+        model: 'PERSONNE',
+        key: 'ID'
+      }
+    },
+    ORGANISATION_ID: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'ORGANISATION',
+        key: 'ID'
+      }
+    },
+    COMMANDE_ID: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'COMMANDE',
+        key: 'ID'
       }
     },
     DATE: {
@@ -33,6 +44,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     HEURE: {
       type: DataTypes.TIME,
+      allowNull: true
+    },
+    REMARQUE: {
+      type: DataTypes.CHAR(250),
       allowNull: true
     }
   }, {

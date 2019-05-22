@@ -3,7 +3,7 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('ORGANISATION', {
     ID: {
-      type: DataTypes.CHAR(32),
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true
     },

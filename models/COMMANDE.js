@@ -2,23 +2,10 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('COMMANDE', {
-    PRODUIT_ID: {
-      type: DataTypes.CHAR(32),
+    ID: {
+      type: DataTypes.INTEGER(11),
       allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'PRODUIT',
-        key: 'ID'
-      }
-    },
-    ORGANISATION_ID: {
-      type: DataTypes.CHAR(32),
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'ORGANISATION',
-        key: 'ID'
-      }
+      primaryKey: true
     },
     QUANTITE: {
       type: DataTypes.INTEGER(10),
@@ -28,9 +15,17 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATEONLY,
       allowNull: true
     },
-    PRIX: {
-      type: DataTypes.INTEGER(10),
+    PRIXTOTAL: {
+      type: DataTypes.INTEGER(50),
       allowNull: true
+    },
+    ORGANISATION_ID: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      references: {
+        model: 'ORGANISATION',
+        key: 'ID'
+      }
     }
   }, {
     tableName: 'COMMANDE'

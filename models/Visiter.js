@@ -1,56 +1,57 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('VISITER', {
+const Sequelize = require('sequelize');
+const db = require('../Database').getConnection();
+
+module.exports = db.define('VISITER', {
     DMO_ID: {
-      type: DataTypes.INTEGER(11),
+      type: Sequelize.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'PERSONNE',
+        model: 'Personne',
         key: 'ID'
       }
     },
     CONTACT_ID: {
-      type: DataTypes.INTEGER(11),
+      type: Sequelize.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'PERSONNE',
+        model: 'Personne',
         key: 'ID'
       }
     },
     ORGANISATION_ID: {
-      type: DataTypes.INTEGER(11),
+      type: Sequelize.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'ORGANISATION',
+        model: 'Organisation',
         key: 'ID'
       }
     },
     COMMANDE_ID: {
-      type: DataTypes.INTEGER(11),
+      type: Sequelize.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'COMMANDE',
+        model: 'Commande',
         key: 'ID'
       }
     },
     DATE: {
-      type: DataTypes.DATEONLY,
+      type: Sequelize.DATEONLY,
       allowNull: true
     },
     HEURE: {
-      type: DataTypes.TIME,
+      type: Sequelize.TIME,
       allowNull: true
     },
     REMARQUE: {
-      type: DataTypes.CHAR(250),
+      type: Sequelize.CHAR(250),
       allowNull: true
     }
   }, {
     tableName: 'VISITER'
-  });
-};
+});

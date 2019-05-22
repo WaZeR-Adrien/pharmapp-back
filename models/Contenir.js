@@ -1,26 +1,27 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('CONTENIR', {
+const Sequelize = require('sequelize');
+const db = require('../Database').getConnection();
+
+module.exports = db.define('CONTENIR', {
     PRODUIT_ID: {
-      type: DataTypes.INTEGER(11),
+      type: Sequelize.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'PRODUIT',
+        model: 'Produit',
         key: 'ID'
       }
     },
     COMMANDE_ID: {
-      type: DataTypes.INTEGER(11),
+      type: Sequelize.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'COMMANDE',
+        model: 'Commande',
         key: 'ID'
       }
     }
   }, {
     tableName: 'CONTENIR'
-  });
-};
+});

@@ -1,33 +1,33 @@
 /* jshint indent: 2 */
+const Sequelize = require('sequelize');
+const db = require('../Database').getConnection();
 
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('COMMANDE', {
+module.exports = db.define('COMMANDE', {
     ID: {
-      type: DataTypes.INTEGER(11),
+      type: Sequelize.INTEGER(11),
       allowNull: false,
       primaryKey: true
     },
     QUANTITE: {
-      type: DataTypes.INTEGER(10),
+      type: Sequelize.INTEGER(10),
       allowNull: true
     },
     DATE: {
-      type: DataTypes.DATEONLY,
+      type: Sequelize.DATEONLY,
       allowNull: true
     },
     PRIXTOTAL: {
-      type: DataTypes.INTEGER(50),
+      type: Sequelize.INTEGER(50),
       allowNull: true
     },
     ORGANISATION_ID: {
-      type: DataTypes.INTEGER(11),
+      type: Sequelize.INTEGER(11),
       allowNull: false,
       references: {
-        model: 'ORGANISATION',
+        model: 'Organisation',
         key: 'ID'
       }
     }
   }, {
     tableName: 'COMMANDE'
-  });
-};
+});

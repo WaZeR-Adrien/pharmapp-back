@@ -1,33 +1,34 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('PRODUIT', {
+const Sequelize = require('sequelize');
+const db = require('../Database').getConnection();
+
+module.exports = db.define('PRODUIT', {
     ID: {
-      type: DataTypes.INTEGER(11),
+      type: Sequelize.INTEGER(11),
       allowNull: false,
       primaryKey: true
     },
     NOM: {
-      type: DataTypes.CHAR(50),
+      type: Sequelize.CHAR(50),
       allowNull: true
     },
     MARQUE: {
-      type: DataTypes.CHAR(50),
+      type: Sequelize.CHAR(50),
       allowNull: true
     },
     PRIX: {
-      type: DataTypes.INTEGER(10),
+      type: Sequelize.INTEGER(10),
       allowNull: true
     },
     CATEGORIE_ID: {
-      type: DataTypes.INTEGER(11),
+      type: Sequelize.INTEGER(11),
       allowNull: false,
       references: {
-        model: 'CATEGORIE',
+        model: 'Categorie',
         key: 'ID'
       }
     }
   }, {
     tableName: 'PRODUIT'
-  });
-};
+});

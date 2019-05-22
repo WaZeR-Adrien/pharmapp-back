@@ -1,5 +1,5 @@
-module.exports = class Config {
-    static database = {
+const config = {
+    database: {
         dbname: 'dbname',
         host: 'host',
         port: 3306,
@@ -7,3 +7,5 @@ module.exports = class Config {
         password: 'password'
     }
 }
+
+module.exports = config;

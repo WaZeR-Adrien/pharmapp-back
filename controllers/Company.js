@@ -1,4 +1,4 @@
-const Organisation = require('../models/organisation');
+const Organisation = require('../models/Organisation');
 
 module.exports = class Company {
 

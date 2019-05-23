@@ -5,14 +5,15 @@ const db = require('../Database').getConnection();
 
 module.exports = db.define('ORGANISATION', {
     ID: {
-      type: Sequelize.INTEGER(11),
-      allowNull: false,
-      primaryKey: true
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
     },
     RAISONSOCIALE: {
-      type: Sequelize.CHAR(50),
-      allowNull: true
+        type: Sequelize.CHAR(50),
+        allowNull: true
     }
-  }, {
+}, {
     tableName: 'ORGANISATION'
 });

@@ -26,6 +26,12 @@ app.post('/dmos/:id/visits', (req, res) => {
     });
 })
 
+app.get('/:type(dmos|contacts)/:id/visits', (req, res) => {
+    Visit.getByPeopleId(req.params.type, req.params.id, visits => {
+        res.json(visits);
+    });
+})
+
 let port = process.env.PORT || 3000;
 
 app.listen(port, () => {

@@ -58,6 +58,18 @@ app.get('/categories/:id/products', (req, res) => {
     });
 })
 
+app.post('/products', (req, res) => {
+    Product.add(req.body, product => {
+        res.json(product);
+    });
+})
+
+app.put('/products/:id', (req, res) => {
+    Product.put(req.params.id, req.body, product => {
+        res.json(product);
+    });
+})
+
 let port = process.env.PORT || 3000;
 
 app.listen(port, () => {

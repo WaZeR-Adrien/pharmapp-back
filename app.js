@@ -5,6 +5,10 @@ var bodyParser = require("body-parser");
 const Category = require('./controllers/Category');
 const Contact = require('./controllers/Contact');
 const Visit = require('./controllers/Visit');
+const Command = require('./controllers/Command');
+const People = require('./controllers/People');
+const Company = require('./controllers/Company');
+
 
 app.use(bodyParser.json());
 
@@ -20,11 +24,30 @@ app.get('/contacts', (req, res) => {
     })
 });
 
+app.get('/contacts/:id/commands', (req, res) => {
+    Command.getByContactId(req.params.id, command => {
+        res.json(command);
+    });
+});
+
 app.post('/dmos/:id/visits', (req, res) => {
     Visit.add(req.params.id, req.body, visit => {
         res.json(visit);
     });
-})
+});
+
+app.post('/:type(contacts | dmos | admins)', (req, res) => {
+    People.add(req.params.type, req.body, people => {
+        res.json(people);
+    });
+});
+
+app.post('/companies', (req, res) => {
+    Company.add(req.body, company => {
+        res.json(company);
+    });
+});
+
 
 let port = process.env.PORT || 3000;
 

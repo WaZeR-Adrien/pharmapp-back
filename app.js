@@ -5,6 +5,7 @@ var bodyParser = require("body-parser");
 const Category = require('./controllers/Category');
 const Contact = require('./controllers/Contact');
 const Visit = require('./controllers/Visit');
+const Dmo = require('./controllers/Dmos');
 const Product = require('./controllers/Product')
 
 app.use(bodyParser.json());
@@ -20,6 +21,12 @@ app.get('/contacts', (req, res) => {
         res.json(contacts);
     })
 });
+
+app.get('/dmos', (req, res) => {
+    Dmo.getAll(dmos => {
+        res.json(dmos);
+    });
+})
 
 app.post('/dmos/:id/visits', (req, res) => {
     Visit.add(req.params.id, req.body, visit => {

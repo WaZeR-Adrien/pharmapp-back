@@ -5,6 +5,7 @@ var bodyParser = require("body-parser");
 const Category = require('./controllers/Category');
 const Contact = require('./controllers/Contact');
 const Visit = require('./controllers/Visit');
+const Product = require('./controllers/Product')
 
 app.use(bodyParser.json());
 
@@ -34,6 +35,12 @@ app.put('/dmos/:id/visits', (req, res) => {
 
 app.get('/:type(dmos|contacts)/:id/visits', (req, res) => {
     Visit.getByPeopleId(req.params.type, req.params.id, visits => {
+        res.json(visits);
+    });
+})
+
+app.get('/categories/:id/products', (req, res) => {
+    Product.getByCategoryId(req.params.id, visits => {
         res.json(visits);
     });
 })

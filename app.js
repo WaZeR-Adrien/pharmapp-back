@@ -56,7 +56,6 @@ app.post('/companies', (req, res) => {
     });
 });
 
-
 app.put('/dmos/:id/visits', (req, res) => {
     Visit.put(req.params.id, req.body, visit => {
         res.json(visit);

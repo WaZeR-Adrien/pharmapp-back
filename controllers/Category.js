@@ -1,4 +1,4 @@
-Categorie = require('../models/Categorie');
+const Categorie = require('../models/Categorie');
 
 module.exports = class Category {
 

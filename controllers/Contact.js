@@ -1,4 +1,4 @@
-Personne = require('../models/Personne');
+const Personne = require('../models/Personne');
 
 module.exports = class Contact {
 
@@ -11,5 +11,6 @@ module.exports = class Contact {
             callback(contacts);
         })
     }
+
 
 }

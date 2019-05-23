@@ -42,10 +42,12 @@ module.exports = db.define('VISITER', {
     },
     DATE: {
       type: Sequelize.DATEONLY,
+      defaultValue: Sequelize.NOW,
       allowNull: true
     },
     HEURE: {
       type: Sequelize.TIME,
+      defaultValue: Sequelize.NOW,
       allowNull: true
     },
     REMARQUE: {

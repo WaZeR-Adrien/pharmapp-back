@@ -10,7 +10,8 @@ module.exports = class Database {
             dialect: 'mariadb',
             define: {
                 timestamps: false
-            }
+            },
+            timezone: '+02:00'
         });
     }
 

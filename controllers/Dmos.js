@@ -5,7 +5,7 @@ module.exports = class Dmo {
     static getAll(callback) {
         Personne.findAll({
             where: {
-                TYPE: 'dmo'
+                TYPE: 'DMO'
             }
         }).then(dmos => {
             callback(dmos);

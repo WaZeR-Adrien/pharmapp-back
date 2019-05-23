@@ -8,4 +8,12 @@ module.exports = class Category {
         });
     }
 
+    static add(body, callback) {
+        Categorie.create({
+            NOM: body.NOM
+        }).then(category => {
+            callback(category);
+        })
+    }
+
 }

@@ -46,6 +46,12 @@ app.get('/:type(dmos|contacts)/:id/visits', (req, res) => {
     });
 })
 
+app.post('/categories', (req, res) => {
+    Category.add(req.body, category => {
+        res.json(category);
+    });
+})
+
 app.get('/categories/:id/products', (req, res) => {
     Product.getByCategoryId(req.params.id, visits => {
         res.json(visits);

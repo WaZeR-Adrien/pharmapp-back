@@ -10,7 +10,7 @@ const People = require('./controllers/People');
 const Company = require('./controllers/Company');
 const Dmo = require('./controllers/Dmos');
 const Product = require('./controllers/Product')
-
+const Auth = require('./controllers/Auth');
 
 app.use(bodyParser.json());
 

@@ -11,7 +11,7 @@ module.exports = db.define('CATEGORIE', {
         autoIncrement: true
     },
     NOM: {
-        type: Sequelize.CHAR(50),
+        type: Sequelize.CHAR(255),
         allowNull: true
     }
 }, {

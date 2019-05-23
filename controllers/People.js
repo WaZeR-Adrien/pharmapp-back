@@ -1,4 +1,6 @@
 const Personne = require('../models/Personne');
+const Auth = require('../models/Auth');
+const bcrypt = require('bcrypt');
 
 module.exports = class People {
 
@@ -27,5 +29,17 @@ module.exports = class People {
             callback(people);
         })
 
+    }
+
+    static login(body, callback) {
+        People.findOne({
+            where: {
+                EMAIL: body.EMAIL
+            }
+        }).then(people => {
+            if (bcrypt.compareSync(body.PASSWORD, people.PASSWORD)) {
+
+            }
+        })
     }
 }

@@ -16,6 +16,7 @@ module.exports = db.define('AUTH', {
     },
     DATE: {
         type: Sequelize.DATEONLY,
+        defaultValue: Sequelize.NOW,
         allowNull: false
     },
     PERSONNE_ID: {

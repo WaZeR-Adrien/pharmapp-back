@@ -9,5 +9,4 @@ module.exports = class Company {
             callback(company);
         })
     }
-
 }

@@ -11,6 +11,4 @@ module.exports = class Contact {
             callback(contacts);
         })
     }
-
-
 }

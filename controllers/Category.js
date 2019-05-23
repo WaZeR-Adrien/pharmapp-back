@@ -15,5 +15,4 @@ module.exports = class Category {
             callback(category);
         })
     }
-
 }

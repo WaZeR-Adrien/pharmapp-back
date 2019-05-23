@@ -11,5 +11,4 @@ module.exports = class Dmo {
             callback(dmos);
         })
     }
-
 }

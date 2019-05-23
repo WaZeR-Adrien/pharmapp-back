@@ -11,8 +11,18 @@ const Company = require('./controllers/Company');
 const Dmo = require('./controllers/Dmos');
 const Product = require('./controllers/Product')
 
+const unauthorized = {
+    code: "unauthorized",
+    message: "Your need a valid authentication to the API."
+}
 
 app.use(bodyParser.json());
+
+app.post('/auth', (req, res) => {
+    People.login(req.body, auth => {
+        res.json(auth);
+    });
+});
 
 app.get('/categories', (req, res) => {
     Category.getAll(categories => {
@@ -21,76 +31,142 @@ app.get('/categories', (req, res) => {
 });
 
 app.get('/contacts', (req, res) => {
-    Contact.getAll(contacts => {
-        res.json(contacts);
-    })
+    People.check(req.headers.token, auth => {
+        if (auth) {
+            Contact.getAll(contacts => {
+                res.json(contacts);
+            });
+        } else {
+            res.status(401).json(unauthorized);
+        }
+    });
 });
 
 app.get('/dmos', (req, res) => {
-    Dmo.getAll(dmos => {
-        res.json(dmos);
+    People.check(req.headers.token, auth => {
+        if (auth) {
+            Dmo.getAll(dmos => {
+                res.json(dmos);
+            });
+        } else {
+            res.status(401).json(unauthorized);
+        }
     });
-})
+});
 
 app.get('/contacts/:id/commands', (req, res) => {
-    Command.getByContactId(req.params.id, command => {
-        res.json(command);
+    People.check(req.headers.token, auth => {
+        if (auth) {
+            Command.getByContactId(req.params.id, command => {
+                res.json(command);
+            });
+        } else {
+            res.status(401).json(unauthorized);
+        }
     });
 });
 
 app.post('/dmos/:id/visits', (req, res) => {
-    Visit.add(req.params.id, req.body, visit => {
-        res.json(visit);
+    People.check(req.headers.token, auth => {
+        if (auth) {
+            Visit.add(req.params.id, req.body, visit => {
+                res.json(visit);
+            });
+        } else {
+            res.status(401).json(unauthorized);
+        }
     });
 });
 
 app.post('/:type(contacts|dmos|admins)', (req, res) => {
-    People.add(req.params.type, req.body, people => {
-        res.json(people);
+    People.check(req.headers.token, auth => {
+        if (auth) {
+            People.add(req.params.type, req.body, people => {
+                res.json(people);
+            });
+        } else {
+            res.status(401).json(unauthorized);
+        }
     });
 });
 
 app.post('/companies', (req, res) => {
-    Company.add(req.body, company => {
-        res.json(company);
+    People.check(req.headers.token, auth => {
+        if (auth) {
+            Company.add(req.body, company => {
+                res.json(company);
+            });
+        } else {
+            res.status(401).json(unauthorized);
+        }
     });
 });
 
 app.put('/dmos/:id/visits', (req, res) => {
-    Visit.put(req.params.id, req.body, visit => {
-        res.json(visit);
+    People.check(req.headers.token, auth => {
+        if (auth) {
+            Visit.put(req.params.id, req.body, visit => {
+                res.json(visit);
+            });
+        } else {
+            res.status(401).json(unauthorized);
+        }
     });
-})
+});
 
 app.get('/:type(dmos|contacts)/:id/visits', (req, res) => {
-    Visit.getByPeopleId(req.params.type, req.params.id, visits => {
-        res.json(visits);
+    People.check(req.headers.token, auth => {
+        if (auth) {
+            Visit.getByPeopleId(req.params.type, req.params.id, visits => {
+                res.json(visits);
+            });
+        } else {
+            res.status(401).json(unauthorized);
+        }
     });
-})
+});
 
 app.post('/categories', (req, res) => {
-    Category.add(req.body, category => {
-        res.json(category);
+    People.check(req.headers.token, auth => {
+        if (auth) {
+            Category.add(req.body, category => {
+                res.json(category);
+            });
+        } else {
+            res.status(401).json(unauthorized);
+        }
     });
-})
+});
 
 app.get('/categories/:id/products', (req, res) => {
     Product.getByCategoryId(req.params.id, visits => {
         res.json(visits);
     });
-})
+});
 
 app.post('/products', (req, res) => {
-    Product.add(req.body, product => {
-        res.json(product);
+    People.check(req.headers.token, auth => {
+        if (auth) {
+            Product.add(req.body, product => {
+                res.json(product);
+            });
+        } else {
+            res.status(401).json(unauthorized);
+        }
     });
-})
+});
 
 app.put('/products/:id', (req, res) => {
-    Product.put(req.params.id, req.body, product => {
-        res.json(product);
+    People.check(req.headers.token, auth => {
+        if (auth) {
+            Product.put(req.params.id, req.body, product => {
+                res.json(product);
+            });
+        } else {
+            res.status(401).json(unauthorized);
+        }
     });
-})
+});
 
 let port = process.env.PORT || 3000;
 

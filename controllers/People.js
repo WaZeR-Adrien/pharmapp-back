@@ -1,6 +1,9 @@
 const Personne = require('../models/Personne');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const Auth = require('../models/Auth');
+const ip = require('ip');
+const sha1 = require('sha1');
 
 module.exports = class People {
 
@@ -29,5 +32,39 @@ module.exports = class People {
             .then(people => {
             callback(people);
         })
+    }
+
+    static login(body, callback) {
+        Personne.findOne({
+            where: {
+                EMAIL: body.EMAIL
+            }
+        }).then(people => {
+
+            if (bcrypt.compareSync(body.MDP, people.MDP)) {
+                Auth.create({
+                    TOKEN: Math.random().toString(36).slice(2) + '-' + sha1(ip.address()),
+                    PERSONNE_ID: people.ID
+                }).then(auth => {
+                    callback(auth);
+                })
+            }
+
+        })
+    }
+
+    static check(token, callback) {
+        if (token != undefined && token.split('-')[1] == sha1(ip.address())) {
+            Auth.findOne({
+                where: {
+                    TOKEN: token
+                }
+            }).then(auth => {
+                callback(auth);
+            });
+
+        } else {
+            callback(false);
+        }
     }
 }

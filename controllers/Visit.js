@@ -25,12 +25,12 @@ module.exports = class Visit {
 
     static put(dmo_id, body, callback) {
         Visiter.update({
-            REMARQUE: body.remarque
+            REMARQUE: body.REMARQUE
         }, {
             where: {
                 DMO_ID: dmo_id,
-                CONTACT_ID: body.contact_id,
-                ORGANISATION_ID: body.organisation_id
+                CONTACT_ID: body.CONTACT_ID,
+                ORGANISATION_ID: body.ORGANISATION_ID
             }
         }).then(visit => {
             callback(visit);

@@ -38,6 +38,12 @@ app.get('/:type(dmos|contacts)/:id/visits', (req, res) => {
     });
 })
 
+app.post('/categories', (req, res) => {
+    Category.add(req.body, category => {
+        res.json(category);
+    });
+})
+
 let port = process.env.PORT || 3000;
 
 app.listen(port, () => {

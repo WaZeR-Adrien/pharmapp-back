@@ -26,6 +26,12 @@ app.post('/dmos/:id/visits', (req, res) => {
     });
 })
 
+app.put('/dmos/:id/visits', (req, res) => {
+    Visit.put(req.params.id, req.body, visit => {
+        res.json(visit);
+    });
+})
+
 app.get('/:type(dmos|contacts)/:id/visits', (req, res) => {
     Visit.getByPeopleId(req.params.type, req.params.id, visits => {
         res.json(visits);

@@ -23,4 +23,18 @@ module.exports = class Visit {
         });
     }
 
+    static put(dmo_id, body, callback) {
+        Visiter.update({
+            REMARQUE: body.remarque
+        }, {
+            where: {
+                DMO_ID: dmo_id,
+                CONTACT_ID: body.contact_id,
+                ORGANISATION_ID: body.organisation_id
+            }
+        }).then(visit => {
+            callback(visit);
+        })
+
+    }
 }

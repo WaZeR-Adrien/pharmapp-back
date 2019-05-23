@@ -1,13 +1,14 @@
 const Personne = require('../models/Personne');
-const Auth = require('../models/Auth');
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const Auth = require('../models/Auth');
 
 module.exports = class People {
 
-    static add(body, callback) {
+    static add(type, body, callback) {
 
         let data = {
-            TYPE: body.type,
+            TYPE: type.slice(0,type.length -1).toUpperCase(),
             NOM: body.NOM,
             PRENOM: body.PRENOM,
             EMAIL: body.EMAIL,
@@ -16,19 +17,19 @@ module.exports = class People {
             VILLE: body.VILLE
         }
 
-        if (type == 'contact'){
-            data.STATUT = body.statut;
-        }
-
-        if (type == 'DMO' || 'admin'){
-            data.MDP = body.MDP;
+        if (type == 'contacts'){
+            data.STATUT = body.STATUT;
+            data.ETRE_RESPONSABLE_ID = body.ETRE_RESPONSABLE_ID;
+            data.APPARTENIR_ID = body.APPARTENIR_ID;
+        } else if (['dmos', 'admins'].includes(type)){
+            data.MDP = bcrypt.hashSync(body.MDP, saltRounds);
             data.DATEEMBAUCHE = body.DATEEMBAUCHE;
         }
 
-        Personne.create(data).then(people => {
+        Personne.create(data)
+            .then(people => {
             callback(people);
         })
-
     }
 
     static login(body, callback) {

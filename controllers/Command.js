@@ -5,8 +5,6 @@ module.exports = class Command {
 
     static getByContactId(id, callback) {
         Personne.findByPk(id).then(contact => {
-
-
             Commande.findAll({
                 where: {
                     ORGANISATION_ID: contact.APPARTENIR_ID
@@ -16,6 +14,4 @@ module.exports = class Command {
             });
         })
     }
-
-
 }

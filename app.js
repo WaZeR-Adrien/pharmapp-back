@@ -44,7 +44,7 @@ app.post('/dmos/:id/visits', (req, res) => {
     });
 });
 
-app.post('/:type(contacts | dmos | admins)', (req, res) => {
+app.post('/:type(contacts|dmos|admins)', (req, res) => {
     People.add(req.params.type, req.body, people => {
         res.json(people);
     });

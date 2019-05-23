@@ -24,10 +24,9 @@ module.exports = class Product {
             where: {
                 ID: product_id,
             }
-        }).then(visit => {
-            callback(visit);
+        }).then(products => {
+            callback(products);
         })
-
     }
 
     static getByCategoryId(categorie_id, callback) {

@@ -1,12 +1,13 @@
 const Personne = require('../models/Personne');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 module.exports = class People {
 
     static add(type, body, callback) {
 
         let data = {
-
-            TYPE: type.slice(0,type.length -1),
+            TYPE: type.slice(0,type.length -1).toUpperCase(),
             NOM: body.NOM,
             PRENOM: body.PRENOM,
             EMAIL: body.EMAIL,
@@ -19,13 +20,10 @@ module.exports = class People {
             data.STATUT = body.STATUT;
             data.ETRE_RESPONSABLE_ID = body.ETRE_RESPONSABLE_ID;
             data.APPARTENIR_ID = body.APPARTENIR_ID;
-        }
-
-        else if (type == 'dmos' || 'admins'){
-            data.MDP = body.MDP;
+        } else if (['dmos', 'admins'].includes(type)){
+            data.MDP = bcrypt.hashSync(body.MDP, saltRounds);
             data.DATEEMBAUCHE = body.DATEEMBAUCHE;
         }
-
 
         Personne.create(data)
             .then(people => {

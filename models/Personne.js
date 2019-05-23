@@ -52,7 +52,7 @@ module.exports = db.define('PERSONNE', {
     },
     APPARTENIR_ID: {
         type: Sequelize.INTEGER(11),
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'Organisation',
             key: 'ID'
@@ -60,7 +60,7 @@ module.exports = db.define('PERSONNE', {
     },
     ETRE_RESPONSABLE_ID: {
         type: Sequelize.INTEGER(11),
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'Organisation',
             key: 'ID'

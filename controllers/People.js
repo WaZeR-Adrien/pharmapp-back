@@ -29,6 +29,5 @@ module.exports = class People {
             .then(people => {
             callback(people);
         })
-
     }
 }

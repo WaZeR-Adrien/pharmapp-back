@@ -13,4 +13,14 @@ module.exports = class Visit {
         })
     }
 
+    static getByPeopleId(type, people_id, callback) {
+        const where = type == 'dmos' ? {DMO_ID: people_id} : {CONTACT_ID: people_id};
+
+        Visiter.findAll({
+            where
+        }).then(visits => {
+            callback(visits);
+        });
+    }
+
 }

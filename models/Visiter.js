@@ -33,8 +33,7 @@ module.exports = db.define('VISITER', {
     },
     COMMANDE_ID: {
       type: Sequelize.INTEGER(11),
-      allowNull: false,
-      primaryKey: true,
+      allowNull: true,
       references: {
         model: 'Commande',
         key: 'ID'

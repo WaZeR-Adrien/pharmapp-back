@@ -46,7 +46,15 @@ module.exports = class People {
                     TOKEN: Math.random().toString(36).slice(2) + '-' + sha1(ip.address()),
                     PERSONNE_ID: people.ID
                 }).then(auth => {
-                    callback(auth);
+                    Personne.findOne({
+                        where: {
+                            ID: auth.PERSONNE_ID
+                        }
+                    }).then(personne => {
+                        callback({
+                            auth, personne
+                        });
+                    });
                 })
             }
 
@@ -58,7 +66,10 @@ module.exports = class People {
             Auth.findOne({
                 where: {
                     TOKEN: token
-                }
+                },
+                include: [{
+                    model: Personne
+                }]
             }).then(auth => {
                 callback(auth);
             });

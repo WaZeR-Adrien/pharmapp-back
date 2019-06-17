@@ -1,7 +1,9 @@
+// Libs
 const express = require("express");
 const app = express();
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 
+// Controllers
 const Category = require('./controllers/Category');
 const Contact = require('./controllers/Contact');
 const Visit = require('./controllers/Visit');
@@ -11,11 +13,22 @@ const Company = require('./controllers/Company');
 const Dmo = require('./controllers/Dmos');
 const Product = require('./controllers/Product')
 
+// Models conf
+const Categorie = require('./models/Categorie');
+const Produit = require('./models/Produit');
+Categorie.hasMany(Produit, {
+    as: 'PRODUITS',
+    foreignKey: 'CATEGORIE_ID',
+    target: 'CATEGORIE_ID'
+})
+
+// Errors
 const unauthorized = {
     code: "unauthorized",
     message: "Your need a valid authentication to the API."
 }
 
+// Router conf
 app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -25,15 +38,10 @@ app.use((req, res, next) => {
     next();
 });
 
+// Routes
 app.post('/auth', (req, res) => {
     People.login(req.body, auth => {
         res.json(auth);
-    });
-});
-
-app.get('/categories', (req, res) => {
-    Category.getAll(categories => {
-        res.json(categories);
     });
 });
 
@@ -145,6 +153,12 @@ app.post('/categories', (req, res) => {
     });
 });
 
+app.get('/categories', (req, res) => {
+    Category.getAll(categories => {
+        res.json(categories);
+    });
+});
+
 app.get('/categories/:id/products', (req, res) => {
     Product.getByCategoryId(req.params.id, visits => {
         res.json(visits);
@@ -175,6 +189,7 @@ app.put('/products/:id', (req, res) => {
     });
 });
 
+// Serve conf
 let port = process.env.PORT || 3000;
 
 app.listen(port, () => {

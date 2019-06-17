@@ -1,9 +1,7 @@
-/* jshint indent: 2 */
-
 const Sequelize = require('sequelize');
 const db = require('../Database').getConnection();
 
-module.exports = db.define('CATEGORIE', {
+const Categorie = db.define('CATEGORIE', {
     ID: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
@@ -17,3 +15,5 @@ module.exports = db.define('CATEGORIE', {
 }, {
     tableName: 'CATEGORIE'
 });
+
+module.exports = Categorie;

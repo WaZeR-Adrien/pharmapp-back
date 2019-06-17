@@ -1,9 +1,15 @@
 const Categorie = require('../models/Categorie');
+const Produit = require('../models/Produit');
 
 module.exports = class Category {
 
     static getAll(callback) {
-        Categorie.findAll().then(categories => {
+        Categorie.findAll({
+            include: [{
+                model: Produit,
+                as: 'PRODUITS'
+            }]
+        }).then(categories => {
             callback(categories);
         });
     }

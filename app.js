@@ -13,15 +13,6 @@ const Company = require('./controllers/Company');
 const Dmo = require('./controllers/Dmos');
 const Product = require('./controllers/Product')
 
-// Models conf
-const Categorie = require('./models/Categorie');
-const Produit = require('./models/Produit');
-Categorie.hasMany(Produit, {
-    as: 'PRODUITS',
-    foreignKey: 'CATEGORIE_ID',
-    target: 'CATEGORIE_ID'
-})
-
 // Errors
 const unauthorized = {
     code: "unauthorized",

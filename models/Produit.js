@@ -15,7 +15,7 @@ const Produit = db.define('PRODUIT', {
         allowNull: true
     },
     PRIX: {
-        type: Sequelize.INTEGER(10),
+        type: Sequelize.DECIMAL(10,2),
         allowNull: true
     },
     CATEGORIE_ID: {

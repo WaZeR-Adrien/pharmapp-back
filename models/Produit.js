@@ -14,10 +14,6 @@ const Produit = db.define('PRODUIT', {
         type: Sequelize.CHAR(50),
         allowNull: true
     },
-    MARQUE: {
-        type: Sequelize.CHAR(50),
-        allowNull: true
-    },
     PRIX: {
         type: Sequelize.INTEGER(10),
         allowNull: true

@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const db = require('../Database').getConnection();
 
-module.exports = db.define('AUTH', {
+const Auth = db.define('AUTH', {
     ID: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
@@ -30,3 +30,5 @@ module.exports = db.define('AUTH', {
 }, {
     tableName: 'AUTH'
 });
+
+module.exports = Auth;

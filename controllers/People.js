@@ -66,10 +66,7 @@ module.exports = class People {
             Auth.findOne({
                 where: {
                     TOKEN: token
-                },
-                include: [{
-                    model: Personne
-                }]
+                }
             }).then(auth => {
                 callback(auth);
             });

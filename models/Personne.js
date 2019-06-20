@@ -58,13 +58,10 @@ const Personne = db.define('PERSONNE', {
             key: 'ID'
         }
     },
-    ETRE_RESPONSABLE_ID: {
-        type: Sequelize.INTEGER(11),
-        allowNull: true,
-        references: {
-            model: 'Organisation',
-            key: 'ID'
-        }
+    ETRE_RESPONSABLE: {
+        type: Sequelize.TINYINT,
+        defaultValue: 0,
+        allowNull: false
     }
 }, {
     tableName: 'PERSONNE'

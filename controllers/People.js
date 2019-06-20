@@ -46,14 +46,8 @@ module.exports = class People {
                     TOKEN: Math.random().toString(36).slice(2) + '-' + sha1(ip.address()),
                     PERSONNE_ID: people.ID
                 }).then(auth => {
-                    Personne.findOne({
-                        where: {
-                            ID: auth.PERSONNE_ID
-                        }
-                    }).then(personne => {
-                        callback({
-                            auth, personne
-                        });
+                    callback({
+                        auth, people
                     });
                 })
             }

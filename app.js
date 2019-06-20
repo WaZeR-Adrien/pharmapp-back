@@ -18,8 +18,8 @@ const Organisation = require('./models/Organisation');
 const Personne = require('./models/Personne');
 Organisation.hasMany(Personne, {
     as: 'PERSONNES',
-    foreignKey: 'ORGANISATION_ID',
-    target: 'ORGANISATION_ID',
+    foreignKey: 'APPARTENIR_ID',
+    target: 'APPARTENIR_ID',
 })
 
 // Errors

@@ -9,9 +9,18 @@ const Contact = require('./controllers/Contact');
 const Visit = require('./controllers/Visit');
 const Command = require('./controllers/Command');
 const People = require('./controllers/People');
-const Company = require('./controllers/Company');
+const Organization = require('./controllers/Organization');
 const Dmo = require('./controllers/Dmos');
 const Product = require('./controllers/Product')
+
+// Models conf
+const Organisation = require('./models/Organisation');
+const Personne = require('./models/Personne');
+Organisation.hasMany(Personne, {
+    as: 'PERSONNES',
+    foreignKey: 'ORGANISATION_ID',
+    target: 'ORGANISATION_ID',
+})
 
 // Errors
 const unauthorized = {
@@ -99,7 +108,7 @@ app.post('/:type(contacts|dmos|admins)', (req, res) => {
 app.post('/companies', (req, res) => {
     People.check(req.headers.token, auth => {
         if (auth) {
-            Company.add(req.body, company => {
+            Organization.add(req.body, company => {
                 res.json(company);
             });
         } else {

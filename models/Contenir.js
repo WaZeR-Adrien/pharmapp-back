@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const db = require('../Database').getConnection();
 
-module.exports = db.define('CONTENIR', {
+const Contenir = db.define('CONTENIR', {
     PRODUIT_ID: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
@@ -25,3 +25,5 @@ module.exports = db.define('CONTENIR', {
 }, {
     tableName: 'CONTENIR'
 });
+
+module.exports = Contenir;

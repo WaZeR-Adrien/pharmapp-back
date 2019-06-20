@@ -2,7 +2,7 @@
 const Sequelize = require('sequelize');
 const db = require('../Database').getConnection();
 
-module.exports = db.define('COMMANDE', {
+const Commande = db.define('COMMANDE', {
     ID: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
@@ -32,3 +32,5 @@ module.exports = db.define('COMMANDE', {
 }, {
     tableName: 'COMMANDE'
 });
+
+module.exports = Commande

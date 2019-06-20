@@ -4,7 +4,11 @@ module.exports = class Company {
 
     static add(body, callback) {
         Organisation.create({
-            RAISONSOCIALE: body.RAISONSOCIALE
+            RAISONSOCIALE: body.RAISONSOCIALE,
+            include: [{
+                model: Personne,
+                as: 'PERSONNES'
+            }]
         }).then(company => {
             callback(company);
         })

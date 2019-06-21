@@ -40,7 +40,9 @@ app.use((req, res, next) => {
 
 // Routes
 app.post('/auth', (req, res) => {
-    People.login(req.body, auth => {
+    People.login(req.body, (auth, code = 201) => {
+        res.status(code)
+
         res.json(auth);
     });
 });

@@ -41,15 +41,19 @@ module.exports = class People {
             }
         }).then(people => {
 
-            if (bcrypt.compareSync(body.MDP, people.MDP)) {
+            if (null != people && bcrypt.compareSync(body.MDP, people.MDP)) {
                 Auth.create({
                     TOKEN: Math.random().toString(36).slice(2) + '-' + sha1(ip.address()),
                     PERSONNE_ID: people.ID
                 }).then(auth => {
                     callback({
-                        auth, people
+                        auth, personne: people
                     });
                 })
+            } else {
+                callback({
+                    message: "Informations de connexion non valides !"
+                }, 401);
             }
 
         })

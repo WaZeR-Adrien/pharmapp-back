@@ -15,7 +15,7 @@ module.exports = class Contact {
     static getById(id, callback) {
         Personne.findOne({
             where: {
-                ID: id
+                ID: id,
                 TYPE: 'CONTACT'
             }
         }).then(contact => {

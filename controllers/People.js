@@ -35,6 +35,12 @@ module.exports = class People {
     }
 
     static login(body, callback) {
+        if (!body.EMAIL) {
+            return callback({
+                message: "Informations de connexion non valides !"
+            }, 401);
+        }
+
         Personne.findOne({
             where: {
                 EMAIL: body.EMAIL

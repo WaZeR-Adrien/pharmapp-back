@@ -59,11 +59,11 @@ app.get('/contacts', (req, res) => {
     });
 });
 
-app.get('/dmos', (req, res) => {
+app.get('/contacts/:id', (req, res) => {
     People.check(req.headers.token, auth => {
         if (auth) {
-            Dmo.getAll(dmos => {
-                res.json(dmos);
+            Contact.getById(req.params.id, contact => {
+                res.json(contact);
             });
         } else {
             res.status(401).json(unauthorized);
@@ -76,6 +76,30 @@ app.get('/contacts/:id/commands', (req, res) => {
         if (auth) {
             Command.getByContactId(req.params.id, command => {
                 res.json(command);
+            });
+        } else {
+            res.status(401).json(unauthorized);
+        }
+    });
+});
+
+app.get('/contacts/:id/commands', (req, res) => {
+    People.check(req.headers.token, auth => {
+        if (auth) {
+            Command.getByContactId(req.params.id, command => {
+                res.json(command);
+            });
+        } else {
+            res.status(401).json(unauthorized);
+        }
+    });
+});
+
+app.get('/dmos', (req, res) => {
+    People.check(req.headers.token, auth => {
+        if (auth) {
+            Dmo.getAll(dmos => {
+                res.json(dmos);
             });
         } else {
             res.status(401).json(unauthorized);
@@ -107,7 +131,7 @@ app.post('/:type(contacts|dmos|admins)', (req, res) => {
     });
 });
 
-app.post('/companies', (req, res) => {
+app.post('/organizations', (req, res) => {
     People.check(req.headers.token, auth => {
         if (auth) {
             Organization.add(req.body, company => {

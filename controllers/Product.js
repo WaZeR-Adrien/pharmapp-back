@@ -6,7 +6,6 @@ module.exports = class Product {
         Produit.create({
             ID: body.ID,
             NOM: body.NOM,
-            MARQUE: body.MARQUE,
             PRIX: body.PRIX,
             CATEGORIE_ID: body.CATEGORIE_ID
         }).then(product => {
@@ -17,7 +16,6 @@ module.exports = class Product {
     static put(product_id, body, callback) {
         Produit.update({
             NOM: body.NOM,
-            MARQUE: body.MARQUE,
             PRIX: body.PRIX,
             CATEGORIE_ID: body.CATEGORIE_ID
         }, {

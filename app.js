@@ -146,7 +146,7 @@ app.post('/organizations', (req, res) => {
 app.get('/organizations', (req, res) => {
     People.check(req.headers.token, auth => {
         if (auth) {
-            Organization.getAll(req.body, companies => {
+            Organization.getAll(companies => {
                 res.json(companies);
             });
         } else {

@@ -143,6 +143,18 @@ app.post('/organizations', (req, res) => {
     });
 });
 
+app.get('/organizations', (req, res) => {
+    People.check(req.headers.token, auth => {
+        if (auth) {
+            Organization.getAll(req.body, companies => {
+                res.json(companies);
+            });
+        } else {
+            res.status(401).json(unauthorized);
+        }
+    });
+});
+
 app.put('/dmos/:id/visits', (req, res) => {
     People.check(req.headers.token, auth => {
         if (auth) {

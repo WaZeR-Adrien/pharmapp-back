@@ -13,4 +13,10 @@ module.exports = class Company {
             callback(company);
         })
     }
+
+    static getAll(callback) {
+        Organisation.findAll().then(companies => {
+            callback(companies);
+        })
+    }
 }
